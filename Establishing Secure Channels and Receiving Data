@@ -1,0 +1,30 @@
+def establish_secure_channel():
+    # Create a regular non-secure socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Wrap the socket using SSL for secure communication
+    secure_socket = ssl.wrap_socket(sock, 
+                                    keyfile="path_to_keyfile",
+                                    certfile="path_to_certfile",
+                                    server_side=False)
+
+    # Connect to the server
+    secure_socket.connect((SERVER_IP, SERVER_PORT))
+
+    # Now you can use secure_socket to send/receive data securely
+    return secure_socket
+
+def receive_patient_data_over_secure_channel(secure_socket):
+    try:
+        # Continuously read data from the secure socket
+        while True:
+            received_data = secure_socket.recv(1024)  # Adjust buffer size as needed
+            if not received_data:
+                break  # No more data, exit loop
+            
+            # Process the received data
+            process_patient_data(received_data)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        secure_socket.close()  # Ensure the socket is closed after communication
