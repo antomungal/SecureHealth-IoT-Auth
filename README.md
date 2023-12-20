@@ -1,3 +1,5 @@
+The SecureHealth-IoT-Auth repository is dedicated to implementing a robust and secure authentication protocol between Raspberry Pi devices and a SmartHealth Server. This project aims to enhance the security of medical data transmission in IoT healthcare environments. It features detailed implementation of TPM (Trusted Platform Module) interaction for attestation reports, secure network communication functions, and SSL/TLS encryption for data transmission. The repository provides code for establishing secure channels, handling device-to-server communication, and ensuring data integrity and confidentiality in healthcare IoT systems. It is an essential resource for developers and researchers working on secure IoT healthcare solutions, focusing on practical, hardware-based security approaches to protect sensitive health data against cyber threats.
+
 # SecureHealth-IoT-Auth
 The SecureHealth-IoT-Auth repository is dedicated to implementing a robust and secure authentication protocol between Raspberry Pi devices and a SmartHealth Server. 
 # Sensor-Raspberry Pi and Raspberry Pi-SmartHealth Server Remote Authentication Protocol Implementation Details
