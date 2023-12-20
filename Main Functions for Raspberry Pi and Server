@@ -1,0 +1,9 @@
+def initiate_attestation():
+    nonce = request_nonce_from_server()
+    attestation_report = tpm_create_attestation_report(nonce)
+    send_data_to_server(attestation_report)
+
+def verify_attestation(attestation_report):
+    if validate_attestation_report(attestation_report):
+        establish_secure_channel()
+        receive_patient_data_over_secure_channel()
