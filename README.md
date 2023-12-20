@@ -8,3 +8,8 @@ The SecureHealth-IoT-Auth repository is dedicated to implementing a robust and s
 SERVER_IP = "120.12.12.12"
 SERVER_PORT = 12345
 TPM_VERSION = "2.0"
+
+
+In this implementation, ssl.wrap_socket is used to wrap a standard socket into an SSL socket. The keyfile and certfile arguments specify the file paths to the private key and the certificate, which are necessary for establishing a secure TLS connection. This example assumes that the server is set up to handle SSL connections and that you have valid certificate and key files. Remember, for real-world applications, you should handle exceptions and errors appropriately, and ensure the certificate and key files are securely managed.
+
+As secure_socket is the SSL-secured socket returned by the establish_secure_channel function. Data is read in a loop from the socket, and process_patient_data is a placeholder for the logic required to handle the received data. The recv method reads data from the socket, and the loop continues until there's no more data to read. Exception handling is essential to gracefully handle any errors that may occur during network communication.
