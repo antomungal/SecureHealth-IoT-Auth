@@ -1,0 +1,31 @@
+role raspberryPi(Nonce_RPi, Key_RPi, PubKey_Server, SID, RPi, Server) played_by RPi {
+  local State: nat, Nonce_S: text, AttestationReport: text
+
+  init -> State := 0
+  transition
+    0. State = 0 /\ RCV(Server, RPi, Nonce_S) =|>
+       State' := 1 /\ AttestationReport' := createAttestationReport(Nonce_RPi, Nonce_S, Key_RPi)
+       /\ SND(RPi, Server, AttestationReport')
+
+    1. State = 1 /\ RCV(Server, RPi, secureChannelRequest) =|>
+       State' := 2 /\ establishSecureChannel(PubKey_Server)
+}
+
+role server(PubKey_Server, Key_Server, SID, RPi, Server) played_by Server {
+  local State: nat, Nonce_S: text, Valid: bool
+
+  init -> State := 0 /\ Nonce_S' := new()
+  transition
+    0. State = 0 /\ SND(Server, RPi, Nonce_S) =|>
+       State' := 1
+
+    1. State = 1 /\ RCV(RPi, Server, AttestationReport) =|>
+       State' := 2 /\ Valid' := verifyAttestationReport(AttestationReport, PubKey_Server)
+       /\ SND(Server, RPi, secureChannelRequest)
+}
+
+goal
+  raspberryPi authenticates Server
+  server authenticates raspberryPi
+  secrecy_of Key_RPi
+  secrecy_of Key_Server
