@@ -1,0 +1,7 @@
+def tpm_create_attestation_report(nonce):
+    # Creating an attestation report.
+    return "attestation_report_example"
+
+def validate_attestation_report(attestation_report):
+    # Attestation report validation
+    return True
