@@ -1,0 +1,10 @@
+def send_data_to_server(data):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((SERVER_IP, SERVER_PORT))
+        s.sendall(data.encode())
+        response = s.recv(1024)
+    return response.decode()
+
+def request_nonce_from_server():
+    nonce = send_data_to_server("request_nonce")
+    return nonce
